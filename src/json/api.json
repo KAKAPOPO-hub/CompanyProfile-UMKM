@@ -30,4 +30,4 @@
   { "id": 31, "nama": "Chicken Breast", "harga": 38000, "stok": 35, "kategori": "meat", "satuan": "kg", "gambar": "../../assets/meat/chicken.jpg", "deskripsi": "Fresh boneless chicken breast, 1kg per pack." },
   { "id": 32, "nama": "Beef Sirloin", "harga": 120000, "stok": 20, "kategori": "meat", "satuan": "kg", "gambar": "../../assets/meat/meat.jpg", "deskripsi": "Australian beef sirloin, sliced 1kg per pack." },
   { "id": 33, "nama": "Salmon Fillet", "harga": 85000, "stok": 15, "kategori": "meat", "satuan": "kg", "gambar": "../../assets/meat/salmon.jpg", "deskripsi": "Norwegian salmon fillet, fresh 500g per pack." }
-]
+]   
