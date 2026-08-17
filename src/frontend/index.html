@@ -7,7 +7,7 @@
     <!-- Title -->
     <title>NullMarket Vegetables</title>
     <!-- Tailwind -->
-    <link rel="stylesheet" href="src/frontend/output.css">
+    <link rel="stylesheet" href="output.css">
     <!-- ICON -->
     <link rel="icon" href="">
 </head>
@@ -197,7 +197,222 @@
             </div>
         </div>
 
-        <div id="container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-22"></div>
+        <!-- ===== VALUE PROPOSITION SECTION ===== -->
+        <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
+                    Mengapa Pilih <span class="text-emerald-600">NullMarket?</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-gradient-to-br from-emerald-50 to-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Pengiriman Terjadwal</h3>
+                        <p class="text-gray-600">Pilih jam pengiriman sesuai jadwal pulang Anda. Pagi atau sore, kapan saja Anda butuh.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-gradient-to-br from-emerald-50 to-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Jaminan Segar 100%</h3>
+                        <p class="text-gray-600">Garansi ganti baru jika sayur layu atau rusak. Kualitas terjamin dari petani ke meja Anda.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-gradient-to-br from-emerald-50 to-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Siap Masak</h3>
+                        <p class="text-gray-600">Paket potong & bumbu praktis. Tinggal masak, tidak perlu repot memilih bahan lagi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CATEGORIES SECTION ===== -->
+        <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
+                    Kategori <span class="text-emerald-600">Produk</span>
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+                    <button class="category-btn p-4 rounded-lg bg-white shadow-sm hover:shadow-md hover:border-emerald-600 border-2 border-gray-200 transition-all font-semibold text-gray-700 hover:text-emerald-600" data-category="sayur">
+                        🥗 Sayur Hijau
+                    </button>
+                    <button class="category-btn p-4 rounded-lg bg-white shadow-sm hover:shadow-md hover:border-emerald-600 border-2 border-gray-200 transition-all font-semibold text-gray-700 hover:text-emerald-600" data-category="buah">
+                        🍎 Buah Segar
+                    </button>
+                    <button class="category-btn p-4 rounded-lg bg-white shadow-sm hover:shadow-md hover:border-emerald-600 border-2 border-gray-200 transition-all font-semibold text-gray-700 hover:text-emerald-600" data-category="dairy">
+                        🥛 Bumbu Dapur
+                    </button>
+                    <button class="category-btn p-4 rounded-lg bg-white shadow-sm hover:shadow-md hover:border-emerald-600 border-2 border-gray-200 transition-all font-semibold text-gray-700 hover:text-emerald-600" data-category="meat">
+                        🍗 Protein
+                    </button>
+                </div>
+
+                <!-- Featured Products Grid -->
+                <div id="container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- ===== TESTIMONIAL SECTION ===== -->
+        <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
+                    Apa Kata <span class="text-emerald-600">Pelanggan Kami</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <span>★★★★★</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            "Sangat membantu! Saya sudah tidak perlu lagi repot keluar kantor untuk belanja sayur. Pengirimannya tepat waktu dan sayurnya segar."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white font-semibold mr-3">
+                                BW
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900">Budi Wahyu</p>
+                                <p class="text-sm text-gray-500">Karyawan IT, Jakarta</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <span>★★★★★</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            "Paket ready-to-cook nya sangat praktis! Habis pulang kerja, langsung bisa masak. Hemat waktu dan energi."
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white font-semibold mr-3">
+                                SR
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900">Siti Rani</p>
+                                <p class="text-sm text-gray-500">HR Manager, Bandung</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <span>★★★★★</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            "Jaminan segar atau ganti baru membuat saya percaya. Kualitasnya memang top, dan harganya kompetitif!"
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white font-semibold mr-3">
+                                AH
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900">Ahmad Hidayat</p>
+                                <p class="text-sm text-gray-500">Akuntan, Surabaya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA SECTION ===== -->
+        <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-emerald-600 to-emerald-700">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Siap Berbelanja Lebih Mudah?
+                </h2>
+                <p class="text-lg text-emerald-50 mb-8">
+                    Dapatkan pengiriman cepat dan sayur segar langsung ke rumah Anda hari ini juga!
+                </p>
+                <button onclick="document.location='#'" class="px-8 py-3 bg-white text-emerald-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+                    Mulai Belanja Sekarang
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="bg-gray-900 text-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <!-- Brand -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-emerald-400 mb-4">NullMarket</h3>
+                        <p class="text-gray-400">Sayur segar langsung dari petani untuk meja makan Anda.</p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="font-semibold text-white mb-4">Tautan Cepat</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="index.html" class="hover:text-emerald-400 transition-colors">Home</a></li>
+                            <li><a href="about.html" class="hover:text-emerald-400 transition-colors">Tentang Kami</a></li>
+                            <li><a href="#" class="hover:text-emerald-400 transition-colors">Produk</a></li>
+                            <li><a href="#" class="hover:text-emerald-400 transition-colors">FAQ</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div>
+                        <h4 class="font-semibold text-white mb-4">Media Sosial</h4>
+                        <div class="flex gap-4">
+                            <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 002.856-3.51 10 10 0 01-2.856.55 5 5 0 00-3.476-1.484c-2.613 0-4.744 2.125-4.744 4.74 0 .37.04.73.12 1.08a14.22 14.22 0 01-10.34-5.218 4.74 4.74 0 00-.64 2.38c0 1.645.84 3.095 2.12 3.95a4.72 4.72 0 01-2.15-.59v.06c0 2.3 1.637 4.223 3.813 4.653a4.73 4.73 0 01-2.147.08 4.75 4.75 0 044.435 3.294 9.51 9.51 0 01-5.868 2.02c-.38 0-.76-.023-1.124-.068a14.212 14.212 0 007.708 2.258c9.25 0 14.288-7.655 14.288-14.29 0-.218-.005-.435-.015-.649a10.182 10.182 0 002.497-2.6z"/></svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.965 23.906h-1.93V12.01h1.93v11.896zm.995-13.477c-.619 0-1.023-.504-1.023-1.132 0-.635.404-1.133 1.053-1.133.619 0 1.023.504 1.023 1.133 0 .628-.404 1.132-1.053 1.132zm10.14.397c-2.164 0-3.367 1.195-3.945 2.033h-.06V12.01h-1.87c.024.636 0 11.896 0 11.896h1.87v-5.916c0-.316.025-.632.12-.858.264-.633.863-1.29 1.87-1.29 1.319 0 1.848.998 1.848 2.462v5.602h1.87v-6.002c0-3.21-1.714-4.7-3.704-4.7z"/></svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.38 0 0 5.38 0 12c0 5.312 3.435 9.8 8.205 11.385.6.11.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.42-1.305.763-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.604-.015 2.896-.015 3.286 0 .319.216.694.824.576C20.565 21.795 24 17.31 24 12c0-6.62-5.38-12-12-12z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div>
+                        <h4 class="font-semibold text-white mb-4">Kontak</h4>
+                        <p class="text-gray-400 mb-2">📧 info@nullmarket.com</p>
+                        <p class="text-gray-400 mb-2">📱 +62 812-3456-7890</p>
+                        <p class="text-gray-400">📍 Jakarta, Indonesia</p>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 NullMarket. Semua hak dilindungi.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
     </main>
 
     
