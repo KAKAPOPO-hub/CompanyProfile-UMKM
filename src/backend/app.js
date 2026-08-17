@@ -1,5 +1,5 @@
 // Fetch API data
-const API_URL = '../../json/api.json';
+const API_URL = 'http://127.0.0.1:5500/src/json/api.json';
 
 // DOM Elements
 const container = document.getElementById('container');
