@@ -1,217 +1,143 @@
-// Fetch API data
-const API_URL = 'http://127.0.0.1:5500/src/json/api.json';
+const API_URL = '../json/api.json';
 
-// DOM Elements
 const container = document.getElementById('container');
 const categoryButtons = document.querySelectorAll('.category-btn');
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-const mobileAboutBtn = document.getElementById('mobileAboutBtn');
-const mobileDropdown = document.getElementById('mobileDropdown');
-const mobileChevron = document.getElementById('mobileChevron');
-const aboutBtn = document.getElementById('aboutBtn');
-const dropdownMenu = document.getElementById('dropdownMenu');
+const searchInput = document.getElementById('searchInput');
 
-// State
 let products = [];
 let currentCategory = 'all';
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Initialize app
-document.addEventListener('DOMContentLoaded', () => {
-    loadProducts();
-    setupEventListeners();
-    updateCartBadge();
-});
+const categoryDescriptions = {
+  sayur: 'Sumber serat, vitamin, dan nutrisi harian untuk gizi keluarga.',
+  buah: 'Pilihan buah segar dengan rasa manis alami dan kandungan nutrisi tinggi.',
+  frozen_food: 'Produk siap olah yang praktis, cepat, dan tetap terjaga kualitasnya.',
+  dairy: 'Produk susu dan olahan segar yang kaya kalsium dan protein.',
+  meat: 'Daging pilihan dengan kualitas yang terjaga dan proses yang higienis.'
+};
 
-// Load products from API
-async function loadProducts() {
-    try {
-        const response = await fetch(API_URL);
-        products = await response.json();
-        displayProducts(products);
-    } catch (error) {
-        console.error('Error loading products:', error);
-        container.innerHTML = '<p class="text-red-500">Error loading products. Please try again.</p>';
-    }
+function getCategoryDetail(category) {
+  return categoryDescriptions[category] || 'Produk pilihan yang kami jaga kualitasnya agar tetap segar dan bermanfaat.';
 }
 
-// Display products
-function displayProducts(productsToDisplay) {
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
-    if (productsToDisplay.length === 0) {
-        container.innerHTML = '<p class="text-gray-500 col-span-full">Tidak ada produk yang ditemukan.</p>';
-        return;
-    }
-
-    productsToDisplay.forEach(product => {
-        const card = createProductCard(product);
-        container.appendChild(card);
-    });
+function formatPrice(value) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    maximumFractionDigits: 0
+  }).format(value);
 }
 
-// Create product card
 function createProductCard(product) {
-    const card = document.createElement('div');
-    card.className = 'bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden';
-    
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-        }).format(price);
-    };
+  const card = document.createElement('article');
+  card.className = 'overflow-hidden rounded-[26px] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md';
 
-    card.innerHTML = `
-        <div class="relative overflow-hidden h-48 bg-gray-200">
-            <img src="${product.gambar}" alt="${product.nama}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
-            <div class="absolute top-2 right-2 bg-emerald-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                ${product.kategori}
-            </div>
+  const categoryDetail = getCategoryDetail(product.kategori);
+
+  card.innerHTML = `
+    <div class="relative">
+      <img src="${product.gambar}" alt="${product.nama}" class="h-56 w-full object-cover" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80';" />
+      <span class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-brand-700 backdrop-blur-sm">${product.kategori}</span>
+    </div>
+    <div class="p-5">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">${product.nama}</h3>
+          <p class="mt-1 text-sm text-slate-500">${product.satuan}</p>
         </div>
-        <div class="p-4">
-            <h3 class="font-semibold text-gray-900 text-sm md:text-base mb-1 line-clamp-2">${product.nama}</h3>
-            <p class="text-xs text-gray-500 mb-2">${product.satuan}</p>
-            <p class="text-emerald-600 font-bold text-lg mb-3">${formatPrice(product.harga)}</p>
-            <button onclick="addToCart(${product.id})" class="w-full bg-emerald-600 text-white py-2 rounded-lg font-semibold hover:bg-emerald-700 transition-colors text-sm">
-                + Tambah
-            </button>
-        </div>
+        <span class="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700">${product.stok} stok</span>
+      </div>
+
+      <p class="mt-4 text-sm leading-6 text-slate-600">${product.deskripsi}</p>
+
+      <div class="mt-4 rounded-2xl bg-slate-50 p-3">
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Manfaat utama</p>
+        <p class="mt-2 text-sm text-slate-700">${categoryDetail}</p>
+      </div>
+
+      <div class="mt-5 flex items-center justify-between">
+        <p class="text-xl font-black text-brand-700">${formatPrice(product.harga)}</p>
+        <button class="rounded-xl border border-brand-200 bg-brand-50 px-4 py-2.5 text-sm font-semibold text-brand-700 transition hover:bg-brand-100">
+          Lihat detail
+        </button>
+      </div>
+    </div>
+  `;
+
+  return card;
+}
+
+function renderProducts() {
+  if (!container) return;
+
+  const keyword = searchInput && searchInput.value ? searchInput.value.trim().toLowerCase() : '';
+
+  const filtered = products.filter((item) => {
+    const matchesCategory = currentCategory === 'all' || item.kategori === currentCategory;
+    const matchText = !keyword || item.nama.toLowerCase().includes(keyword) || item.deskripsi.toLowerCase().includes(keyword) || item.kategori.toLowerCase().includes(keyword);
+    return matchesCategory && matchText;
+  });
+
+  if (!filtered.length) {
+    container.innerHTML = `
+      <div class="col-span-full rounded-[24px] border border-dashed border-slate-300 bg-white p-10 text-center">
+        <p class="text-lg font-semibold text-slate-700">Produk tidak ditemukan</p>
+        <p class="mt-2 text-sm text-slate-500">Coba cari nama atau manfaat yang lain.</p>
+      </div>
     `;
-    
-    return card;
+    return;
+  }
+
+  container.innerHTML = '';
+  filtered.forEach((product) => {
+    container.appendChild(createProductCard(product));
+  });
 }
 
-// Filter by category
 function filterByCategory(category) {
-    currentCategory = category;
-    
-    // Update active button
-    categoryButtons.forEach(btn => {
-        btn.classList.remove('border-emerald-600', 'bg-emerald-50', 'text-emerald-600');
-        btn.classList.add('border-gray-200');
-    });
-    
-    const activeBtn = document.querySelector(`[data-category="${category}"]`);
-    if (activeBtn) {
-        activeBtn.classList.add('border-emerald-600', 'bg-emerald-50', 'text-emerald-600');
-        activeBtn.classList.remove('border-gray-200');
+  currentCategory = category;
+
+  categoryButtons.forEach((btn) => {
+    const active = btn.dataset.category === category;
+    btn.className = active
+      ? 'category-btn rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white'
+      : 'category-btn rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700';
+  });
+
+  renderProducts();
+}
+
+async function loadProducts() {
+  try {
+    const response = await fetch(API_URL);
+    if (!response.ok) throw new Error('Gagal memuat produk');
+    products = await response.json();
+    renderProducts();
+  } catch (error) {
+    if (container) {
+      container.innerHTML = `
+        <div class="col-span-full rounded-[24px] border border-red-200 bg-red-50 p-8 text-center">
+          <p class="text-lg font-semibold text-red-700">Data produk gagal dimuat</p>
+          <p class="mt-2 text-sm text-red-600">${error.message}</p>
+        </div>
+      `;
     }
-    
-    // Filter and display products
-    const filtered = category === 'all' 
-        ? products 
-        : products.filter(p => p.kategori === category);
-    
-    displayProducts(filtered);
+  }
 }
 
-// Add to cart
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-    
-    const cartItem = cart.find(item => item.id === productId);
-    
-    if (cartItem) {
-        cartItem.quantity++;
-    } else {
-        cart.push({
-            ...product,
-            quantity: 1
-        });
-    }
-    
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartBadge();
-    
-    // Show feedback
-    showNotification(`${product.nama} ditambahkan ke keranjang`);
-}
-
-// Remove from cart
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartBadge();
-}
-
-// Update cart badge
-function updateCartBadge() {
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const badges = document.querySelectorAll('.cart-badge');
-    badges.forEach(badge => {
-        if (totalItems > 0) {
-            badge.textContent = totalItems;
-            badge.classList.remove('hidden');
-        } else {
-            badge.classList.add('hidden');
-        }
-    });
-}
-
-// Show notification
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'fixed bottom-4 right-4 bg-emerald-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade';
-    notification.textContent = message;
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
-}
-
-// Setup event listeners
 function setupEventListeners() {
-    // Category filters
-    categoryButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const category = btn.dataset.category;
-            filterByCategory(category);
-        });
-    });
+  categoryButtons.forEach((button) => {
+    button.addEventListener('click', () => filterByCategory(button.dataset.category));
+  });
 
-    // Mobile menu toggle
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-
-    // Mobile about dropdown
-    if (mobileAboutBtn) {
-        mobileAboutBtn.addEventListener('click', () => {
-            mobileDropdown.classList.toggle('hidden');
-            mobileChevron.classList.toggle('rotate-180');
-        });
-    }
-
-    // Desktop about dropdown
-    if (aboutBtn) {
-        aboutBtn.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('hidden');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#aboutDropdown')) {
-                dropdownMenu.classList.add('hidden');
-            }
-        });
-    }
+  if (searchInput) {
+    searchInput.addEventListener('input', renderProducts);
+  }
 }
 
-// Display first category by default
 document.addEventListener('DOMContentLoaded', () => {
-    if (categoryButtons.length > 0) {
-        const firstCategory = categoryButtons[0].dataset.category;
-        filterByCategory(firstCategory);
-        categoryButtons[0].classList.add('border-emerald-600', 'bg-emerald-50', 'text-emerald-600');
-        categoryButtons[0].classList.remove('border-gray-200');
-    }
+  setupEventListeners();
+  if (categoryButtons.length) {
+    filterByCategory('all');
+  }
+  loadProducts();
 });
